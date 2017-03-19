@@ -1,0 +1,23 @@
+﻿<p>All favorite</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var favorite in Model)
+    {
+        <tr>
+            <td><a asp-action="RecipeDetail" asp-controller="Recipes" asp-route-id="@favorite.Recipe.Id">@favorite.Recipe.Name</a></td>
+            <td>
+                <form method="post" asp-controller="User" asp-action="RemoveFavorite">
+
+                    <input type="hidden" name="Id" value="@favorite.Id" />
+                    <input type="hidden" name="RecipeId" value="@favorite.Recipe.Id" />
+
+                    <button type="submit" class="btn btn-default">Remove Favorite</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,36 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        
+        <h2>Users</h2>
+
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <form method="post" asp-controller="User" asp-action="Update">
+                        <td>@user.Name</td>
+                        <td>@user.Email</td>
+                        <td>
+                            <input type="hidden" name="Id" value="@user.Id" />
+                            <input type="checkbox"class="form-control"  name="Admin" value="1" @(user.Admin == 1 ? "checked=\"checked\"" : "") />
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-default">Edit</button>
+                        </td>
+                    </form>
+                    <td>
+                        <a href="@Url.Action("Remove", "User", new { id = @user.Id})">Remove</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+</div>
